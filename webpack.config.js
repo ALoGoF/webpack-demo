@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const webpack = require('webpack');
 module.exports = {
     mode: 'production',
     devtool:'cheap-module-eval-source-map',
@@ -17,6 +18,8 @@ module.exports = {
     },
     devServer:{
         contentBase:path.join(__dirname, 'dist'),
+        hot:true,
+        // hotOnly:true,
     },
     module: {
         rules:[
@@ -58,7 +61,12 @@ module.exports = {
                     loader:'css-loader',
                     options:{
                         importLoaders:2,
-                        modules:true
+                         modules: {
+                            mode: 'local',
+                            localIdentName: '[local]-[hash:base64:5]',
+                            context: path.resolve(__dirname, 'src'),
+                            hashPrefix: 'my-custom-hash',
+                          },
                     }
                 },
                 'sass-loader','postcss-loader']
@@ -68,5 +76,5 @@ module.exports = {
         plugins:[new CleanWebpackPlugin({
         }),new HtmlWebpackPlugin({
             template:'./index.html'
-        })]
+        }),new webpack.HotModuleReplacementPlugin()]
 }
