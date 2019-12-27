@@ -3,6 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 module.exports = {
     mode: 'production',
+    devtool:'cheap-module-eval-source-map',
+    // 开发环境
+    // devtool:'cheap-module-source-map',
+    // 生产环境
     entry: {
         index:'./src/index.js',
         // sub:'./src/index.js'
@@ -10,6 +14,9 @@ module.exports = {
     output: {
         filename:'[name].js',
         path: path.resolve(__dirname, 'dist'),
+    },
+    devServer:{
+        contentBase:path.join(__dirname, 'dist'),
     },
     module: {
         rules:[
