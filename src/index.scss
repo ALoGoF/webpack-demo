@@ -1,5 +1,6 @@
-.img {
+:local(.img) {
     height: 150px;
     width: 150px;
     transform: translate(200px,100px);
-}
+};
+

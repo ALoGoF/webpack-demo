@@ -4,7 +4,8 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 module.exports = {
     mode: 'production',
-    devtool:'cheap-module-eval-source-map',
+    // devtool:'cheap-module-eval-source-map',
+    // devtool:'eval',
     // 开发环境
     // devtool:'cheap-module-source-map',
     // 生产环境
@@ -19,20 +20,19 @@ module.exports = {
     devServer:{
         contentBase:path.join(__dirname, 'dist'),
         hot:true,
-        // hotOnly:true,
+        hotOnly:true,
     },
     module: {
         rules:[
             {
-                test:'/\.m?js$/',
-                exclude:/(node_modules)/,
-                use:{
-                    loader:'babel-loader',
-                    options:{
-                        presets:['@babel/preset-env']
-                    }
+                test:/\.js$/,
+                exclude:/node_modules/,
+                loader:'babel-loader',
+                options:{
+                    presets:['@babel/preset-env']
                 }
-            },
+            }
+            ,
             // {
             //     test:/\.(png|jpe?g|gif)$/i,
             //     use: [{
@@ -50,7 +50,7 @@ module.exports = {
                 use:[{
                     loader:'url-loader',
                     options:{
-                        limit:2048,
+                        limit:10,
                         esModule:false,
                         outputPath:'images',
                     }
@@ -61,7 +61,7 @@ module.exports = {
                     loader:'css-loader',
                     options:{
                         importLoaders:2,
-                         modules: {
+                        modules: {
                             mode: 'local',
                             localIdentName: '[local]-[hash:base64:5]',
                             context: path.resolve(__dirname, 'src'),
@@ -76,5 +76,7 @@ module.exports = {
         plugins:[new CleanWebpackPlugin({
         }),new HtmlWebpackPlugin({
             template:'./index.html'
-        }),new webpack.HotModuleReplacementPlugin()]
+        }),
+        new webpack.HotModuleReplacementPlugin()
+    ]
 }

@@ -1,0 +1,5 @@
+:global(#wrap){
+    :global(.item):nth-of-type(odd) {
+        background-color: red;
+    }
+}
