@@ -4,14 +4,14 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
-  mode: 'production',
-  // devtool:'cheap-module-eval-source-map',
+  mode: 'development',
+  devtool:'inline-cheap-module-source-map',
   // devtool:'eval',
   // 开发环境
   // devtool:'cheap-module-source-map',
   // 生产环境
   entry: {
-    index:'./src/index.js',
+    index:'./src/main.js',
     // sub:'./src/index.js'
   },
   output: {
@@ -21,7 +21,13 @@ module.exports = {
   devServer:{
     contentBase:path.join(__dirname, 'dist'),
     hot:true,
-    hotOnly:true,
+  },
+  resolve:{
+    extensions: [".js", ".json",'.vue'],
+    modules:['node_modules',path.resolve(__dirname, "src")],
+    alias:{
+      '@':path.resolve(__dirname, 'src')
+    }
   },
   module: {
     rules:[
