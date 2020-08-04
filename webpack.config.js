@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const chalk = require('chalk');
 module.exports = {
   mode: 'development',
   devtool:'inline-cheap-module-source-map',
@@ -21,6 +24,7 @@ module.exports = {
   devServer:{
     contentBase:path.join(__dirname, 'dist'),
     hot:true,
+    quiet: true,
   },
   resolve:{
     extensions: [".js", ".json",'.vue'],
@@ -52,11 +56,20 @@ module.exports = {
       },
       {
         test:/\.(s?css)$/,
-        use:['style-loader','css-loader','sass-loader','postcss-loader']
+        use:['style-loader',{
+          loader:'css-loader',
+          options:{
+            importLoaders:2
+          }
+        },'sass-loader','postcss-loader']
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test:/.(woff|woff2|eot|ttf|otf)$/i,
+        loader:'file-loader'
       }
     ]
   },
@@ -67,6 +80,14 @@ module.exports = {
       template:'./index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new ProgressBarPlugin({
+      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      complete:'-',
+      clear:true,
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      quiet: true,
+    })
   ]
 }
