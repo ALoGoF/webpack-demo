@@ -1,12 +1,30 @@
-.page-header{
+.page-content {
+  position: relative;
+  box-sizing: border-box;
+}
+.page-nav {
+  position: relative;
+  box-sizing: border-box;                                                 
+}
+.page-side-nav {
+  position: relative;
+  box-sizing: border-box;
+}
+.page-nav_item {
   position: relative;
 }
-.page-aside{
+.page-sidebar {
   position: relative;
 }
-.page-main{
+.page-header {
   position: relative;
 }
-.page-footer{
+.page-aside {
+  position: relative;
+}
+.page-main {
+  position: relative;
+}
+.page-footer {
   position: relative;
 }

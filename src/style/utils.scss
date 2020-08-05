@@ -1,0 +1,155 @@
+$basic_size : 1px;
+$basic_size_5 : 5px;
+
+// float
+.fl   { float: left !important; }
+.fr   { float: right !important; }
+
+.clearfix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+ .clearfix-r {
+  &::after {
+    display: block;
+    content: "";
+    clear: right;
+  }
+ }
+ .clearfix-l {
+  &::before {
+    display: block;
+    content: "";
+    clear: left;
+  }
+ }
+// Text size && width && height
+
+@for $size from 0 through 2000 {
+  @if $size <= 200 {
+    .font-#{$size} {
+        font-size: $size *  $basic_size !important;
+    }
+  }
+    .min-width-#{$size} {
+      min-width: #{$size};
+    }
+    .max-width-#{$size} {
+      max-width: #{$size};
+    }
+    .min-height-#{$size} {
+      min-width: #{$size};
+    }
+    .max-height-#{$size} {
+      max-width: #{$size};
+    }
+    .width-#{$size} { 
+        width:  $basic_size * $size !important; 
+    }
+    .height-#{$size} { 
+        height: $basic_size * $size !important; 
+    }
+
+    .lheight-#{$size} {
+        line-height: $basic_size * $size !important; 
+    }
+}
+
+// Text color
+
+
+// Background Color
+
+// Margin and Padding
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @for $size from 0 through 100 {
+        .#{$abbrev}-#{$size}  { #{$prop}:        $basic_size_5 * $size !important; }
+        .#{$abbrev}t-#{$size} { #{$prop}-top:    $basic_size_5 * $size !important; }
+        .#{$abbrev}r-#{$size} { #{$prop}-right:  $basic_size_5 * $size !important; }
+        .#{$abbrev}b-#{$size} { #{$prop}-bottom: $basic_size_5 * $size !important; }
+        .#{$abbrev}l-#{$size} { #{$prop}-left:   $basic_size_5 * $size !important; }
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right: $basic_size_5 * $size !important;
+            #{$prop}-left:  $basic_size_5 * $size !important;
+        }
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top:    $basic_size_5 * $size !important;
+            #{$prop}-bottom: $basic_size_5 * $size !important;
+        }
+    }
+}
+
+// Weight and italics
+.font-weight-normal { font-weight: normal !important; }
+.font-weight-bold   { font-weight: bold !important; }
+.font-italic        { font-style: italic !important; }
+
+.full-width  { width: 100% !important; }
+.full-height { height: 100% !important; }
+
+// Responsive alignment
+.text-left   { text-align: left !important; }
+.text-right  { text-align: right !important; }
+.text-center { text-align: center !important; }
+.text-underline { text-decoration:underline; }
+
+
+// Weight and italics
+.font-weight-normal { font-weight: normal !important; }
+.font-weight-bold   { font-weight: bold !important; }
+.font-italic        { font-style: italic !important; }
+
+// Cursor
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+
+// overflow
+.of-auto      { overflow: auto !important; }
+.of-hidden    { overflow: hidden !important; }
+.of-scroll    { overflow: scroll !important; }
+.of-visible   { overflow: visible !important; }
+
+.ofx-auto     { overflow-x: auto !important; }
+.ofx-hidden   { overflow-x: hidden !important; }
+.ofx-scroll   { overflow-x: scroll !important; }
+.ofx-visible  { overflow-x: visible !important; }
+
+.ofy-auto     { overflow-y: auto !important; }
+.ofy-hidden   { overflow-y: hidden !important; }
+.ofy-scroll   { overflow-y: scroll !important; }
+.ofy-visible  { overflow-y: visible !important; }
+
+/* Align */
+.align-baseline    { vertical-align: baseline !important; } /* Browser default */
+.align-top         { vertical-align: top !important; }
+.align-middle      { vertical-align: middle !important; }
+.align-bottom      { vertical-align: bottom !important; }
+.align-text-bottom { vertical-align: text-bottom !important; }
+.align-text-top    { vertical-align: text-top !important; }
+
+/* display */
+.d-none         { display: none !important; }
+.d-inline       { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-block        { display: block !important; }
+.d-table        { display: table !important; }
+.d-table-cell   { display: table-cell !important; }
+.d-flex         { display: flex !important; }
+.d-inline-flex  { display: inline-flex !important; }
+
+/* Position */
+.position-relative { position: relative; }
+  
+.position-absolute{ position: absolute; }
+
+.position-center {
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;
+}

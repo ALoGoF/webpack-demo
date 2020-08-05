@@ -7,7 +7,7 @@ import Layout from '@/views/layout'
 Vue.use(VueRouter);
 
 
-const routes = [
+export const routes = [
   {
     name: 'Layout',
     path: '/web',
@@ -16,12 +16,14 @@ const routes = [
       { 
         path: 'home',
         name: 'Home',
-        component: Home
+        component: Home,
+        subName:'主页'
       },
       { 
         path: 'user',
         name: 'User',
-        component: User
+        component: User,
+        subName:'个人中心'
       },
       {
         path:'/',
@@ -43,5 +45,4 @@ router.beforeEach((to,from,next) => {
   console.log('to,from :>> ', to,from);
   next()
 })
-
 export default  router;
