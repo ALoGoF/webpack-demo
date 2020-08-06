@@ -1,14 +1,14 @@
 <template>
       <el-menu :default-active="selectedNav.name" mode="horizontal"  @select='handleMenuSelect'>
         <template v-for='({name , subName ,children},index) in menuList'>
-          <submenu v-if='children && children.length' :subMenuObj='{name,subName,children}' :key='name'></submenu>
+          <treeMenu v-if='children && children.length' :subMenuObj='{name,subName,children}' :key='name'></treeMenu>
           <el-menu-item :index="name" :key='name' v-else-if="index < (menuList.length-1)">{{subName}}</el-menu-item>
         </template>
       </el-menu>
 </template>
 
 <script>
-import submenu from './submenu'
+import treeMenu from './submenu'
 export default {
   model: {
     prop:'selectedNav',
@@ -28,7 +28,7 @@ export default {
     }
   },
   components: {
-    submenu
+    treeMenu
   },
   data(){
     return {
