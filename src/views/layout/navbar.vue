@@ -1,7 +1,7 @@
 <template>
-      <el-menu :default-active="selectedNav.name" mode="horizontal" router @select='handleMenuSelect'>
+      <el-menu :default-active="selectedNav.name" mode="horizontal"  @select='handleMenuSelect'>
         <template v-for='{name , subName} in menuList'>
-          <el-menu-item :index="name" :key='name'>{{subName}}</el-menu-item>
+          <el-menu-item :index="name" :key='name' @click='goto(name)'>{{subName}}</el-menu-item>
         </template>
       </el-menu>
 </template>
@@ -35,6 +35,9 @@ export default {
         name : index,
         indexPath:indexPath
       })
+    },
+    goto(name) {
+      this.$router.push({name:name})
     }
   },
   watch:{

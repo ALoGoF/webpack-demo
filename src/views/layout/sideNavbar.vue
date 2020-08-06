@@ -2,7 +2,7 @@
   <div class='page-side-nav side-nav'>
     <el-menu :default-active="selectedSideNav.name"  mode="verticals">
       <template v-for='{name,subName} in sideMenuLsit'>
-        <el-menu-item :key='name' :index="name">{{subName}}</el-menu-item>
+        <el-menu-item :key='name' :index="name" @click='goto(name)'>{{subName}}</el-menu-item>
       </template>
     </el-menu>
   </div>
@@ -31,6 +31,11 @@ export default {
     return {
     }
   },
+  methods: {
+    goto(name) {
+      this.$router.push({name:name})
+    }
+  }
 }
 </script>
 

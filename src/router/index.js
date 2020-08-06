@@ -34,27 +34,31 @@ export const routes = [
         subName:'个人中心',
         children:[
           {
-            path: '/user_page1',
+            path: 'user_page1',
             name: 'UserPage1',
             component: UserPage1,
             subName:'个人中心页1',
           },
           {
-            path: '/user_page2',
+            path: 'user_page2',
             name: 'UserPage2',
             component: UserPage2,
             subName:'个人中心页2',
+          },
+          {
+            path:'',
+            redirect:'user_page1'
           }
         ]
       },
       {
-        path:'/',
+        path:'',
         redirect:'home'
       }
     ]
   },
   {
-    path:'/',
+    path:'',
     redirect:'/web'
   }
 ];

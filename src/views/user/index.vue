@@ -1,7 +1,5 @@
 <template>
-  <div>
-    User
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
