@@ -16,8 +16,8 @@ export default {
     selectedNav: {
       type:Object,
       defalut: {
-        index:0,
-        name:'Home'
+        name:'',
+        indexPath:''
       }
     },
     menuList: {
@@ -31,8 +31,10 @@ export default {
   },
   methods:{
     handleMenuSelect(index,indexPath){
-      this.$emit('select',index,indexPath)
-      console.log('index,indexPath :>> ', index,indexPath);
+      this.$emit('select',{
+        name : index,
+        indexPath:indexPath
+      })
     }
   },
   watch:{
