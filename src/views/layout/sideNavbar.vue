@@ -9,6 +9,8 @@
 </template>
 
 <script>
+
+
 export default {
   model: {
     prop:'selectedSideNav',

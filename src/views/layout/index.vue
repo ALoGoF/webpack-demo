@@ -4,7 +4,6 @@
         <Navbar v-model="selectedNav" :menuList='routes' class='page-header height-60 full-width'></Navbar>
       </div>
     <div class='page-content main-content full-width'>
-      <SideNavbar v-model='selectedSideNav' :sideMenuLsit='sideNav'  v-if='sideNav && sideNav.length' style='flex-grow:0'></SideNavbar>
       <div class="view-port full-height  p-4" style='flex-grow:1'>
         <router-view class='full-height full-width'></router-view>
       </div>
@@ -13,13 +12,13 @@
 </template>
 
 <script>
-import {routes} from '@/router';
 import Navbar from './navbar';
-import SideNavbar from './sideNavbar'
+// import SideNavbar from './sideNavbar';
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
-      routes:routes[0].children,
       selectedNav:{
         name:'',
         indexPath:''
@@ -29,20 +28,26 @@ export default {
   },
   components:{
     Navbar,
-    SideNavbar
   },
   computed: {
-    sideNav(){
-      let nav = this.routes.filter(item => item.name === this.selectedNav.name);
-      let children = [];
-      if(nav.length) children = nav[0].children || [];
-      let sideNav = [];
-      if(children && children.length) sideNav = children;
-      return sideNav
-    }
+    ...mapState({
+      routes: state => {
+        let routes = [];
+        if(state.menu.routes.length) routes = state.menu.routes[0].children
+        return routes
+      },
+    }),
+    // sideNav(){
+    //   let nav = this.routes.filter(item => item.name === this.selectedNav.name);
+    //   let children = [];
+    //   if(nav.length) children = nav[0].children || [];
+    //   let sideNav = [];
+    //   if(children && children.length) sideNav = children;
+    //   return sideNav
+    // }
   },
   created() {
-    this.selectedNav = this.routes[0]
+    // this.selectedNav = this.routes[0]
   },
   watch: {
     sideNav:{
@@ -50,6 +55,11 @@ export default {
         if(sideNav.length) {
           this.selectedSideNav = sideNav[0];
         }
+      }
+    },
+    routes:{
+      handler(routes) {
+        console.log('routes :>> ', routes);
       }
     }
   }

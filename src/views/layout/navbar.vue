@@ -1,12 +1,14 @@
 <template>
       <el-menu :default-active="selectedNav.name" mode="horizontal"  @select='handleMenuSelect'>
-        <template v-for='{name , subName} in menuList'>
-          <el-menu-item :index="name" :key='name' @click='goto(name)'>{{subName}}</el-menu-item>
+        <template v-for='({name , subName ,children},index) in menuList'>
+          <submenu v-if='children && children.length' :subMenuObj='{name,subName,children}' :key='name'></submenu>
+          <el-menu-item :index="name" :key='name' v-else-if="index < (menuList.length-1)">{{subName}}</el-menu-item>
         </template>
       </el-menu>
 </template>
 
 <script>
+import submenu from './submenu'
 export default {
   model: {
     prop:'selectedNav',
@@ -16,7 +18,7 @@ export default {
     selectedNav: {
       type:Object,
       defalut: {
-        name:'',
+        name:'Home',
         indexPath:''
       }
     },
@@ -25,12 +27,16 @@ export default {
       default:() => []
     }
   },
+  components: {
+    submenu
+  },
   data(){
     return {
     }
   },
   methods:{
     handleMenuSelect(index,indexPath){
+      this.$router.push({name:index})
       this.$emit('select',{
         name : index,
         indexPath:indexPath
