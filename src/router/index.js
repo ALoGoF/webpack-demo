@@ -5,8 +5,6 @@ import User from '@/views/user'
 import Layout from '@/views/layout';
 import UserPage1 from '@/views/user/page_1';
 import UserPage2 from '@/views/user/page_2';
-
-
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
@@ -46,29 +44,29 @@ export const routes = [
             subName:'个人中心页2',
           },
           {
-            path:'',
+            path:'*',
             redirect:'user_page1'
           }
         ]
       },
       {
-        path:'',
+        path:'*',
         redirect:'home'
       }
     ]
   },
   {
-    path:'',
+    path:'*',
     redirect:'/web'
   }
 ];
-
+// console.log('routes :>> ', routes);
 const router = new VueRouter({
   routes
 })
 
 router.beforeEach((to,from,next) => {
-  console.log('to,from :>> ', to,from);
+  // console.log('to,from :>> ', to,from);
   next()
 })
 export default  router;

@@ -1,5 +1,5 @@
 <template>
-  <el-submenu :index="subMenuObj.name">
+  <el-submenu :index="subMenuObj.name" :popper-append-to-body='false'>
     <template slot="title">{{subMenuObj.subName}}</template>
     <template v-for='({name , subName ,children},index) in subMenuObj.children'>
       <submenu v-if='children && children.length' :subMenuObj='{name,subName,children}' :key='name'></submenu>
@@ -15,6 +15,8 @@ export default {
       type:Object,
       default: () => {}
     }
+  },
+  created() {
   }
 }
 </script>
